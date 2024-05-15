@@ -8,7 +8,7 @@ class UserControllers {
             }
             const tokensAndUser = await userService.registration(email, password);
             res.cookie('refreshToken', tokensAndUser.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
-            return res.json(tokensAndUser);
+            return res.json({...tokensAndUser, message: 'Вы успешно зарегистрировались!'});
         } catch (e) {
             console.log(e);
             return res.status(500).json({ error: 'Internal server error' });
